@@ -38,6 +38,7 @@ gem 'bcrypt', '~> 3.1.7'
 group :development, :test do
   gem 'jasmine'
   gem 'rspec-rails'
+  gem 'capybara'
   gem 'capybara-webkit'
   gem 'factory_girl_rails'
   gem 'launchy'
