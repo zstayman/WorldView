@@ -1,0 +1,1 @@
+NYT_WIRE = ENV["NYT_WIRE"]
