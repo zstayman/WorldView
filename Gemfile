@@ -49,6 +49,7 @@ end
 
 gem 'redis'
 gem 'httparty'
+gem 'redis-expiring-set'
 
 # Use unicorn as the app server
 # gem 'unicorn'

@@ -1,1 +1,2 @@
-$r = Redis.new
+$redis = Redis.new
+$r = Redis::ExpiringSet.new($redis)
