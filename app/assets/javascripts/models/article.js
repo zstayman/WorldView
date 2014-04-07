@@ -34,13 +34,24 @@ var ArticleView = Backbone.View.extend({
       },
       properties: {
         title: item.title,
-        description: item.abstract,
+        description: '<a href='+ item.url +' target="_blank">'+item.abstract+'</a>',
         // one can customize markers by adding simplestyle properties
         // http://mapbox.com/developers/simplestyle/
         'marker-size': 'small',
-        'marker-color': '#5999E8'
+        'marker-color': view.pinColor(item.section)
       }
     }).addTo(map);
+    },
+
+    pinColor: function(section){
+      var colorHash = {
+        "Business Day": "#61FF53",
+        "U.S.": "#1C0CE8",
+        "Science": "#53FFC2",
+        "World": "#FF0000"
+      };
+
+      return colorHash[section];
     },
 
     initialize: function(){
