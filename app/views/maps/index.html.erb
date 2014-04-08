@@ -7,5 +7,27 @@
     <div class="key">Science</div>
     <div class="key">Business</div>
 </div>
-<div class="user-forms"></div>
+<div class="search_form"></div>
+<%= form_tag do %>
+<%= label_tag(:term, "Find Stories Related To:") %>
+<%= text_field_tag(:term) %><br><br>
+<%= submit_tag("Highlight") %>
+<% end %>
 <div>
+
+<script type="text/javascript">
+  $("form").on("submit", function(e){
+    e.preventDefault();
+    var term = $('#term').val();
+    var icons = map.featureLayer.getGeoJSON();
+
+    _.each(icons, function(elem){
+      elem.properties['marker-color'] = "#000000"
+      if(elem.properties['title'].indexOf(term) !== -1 || elem.properties['description'].indexOf(term) !== -1){
+        elem.properties['marker-color'] = "#FFFFFF";
+      }
+      });
+    map.featureLayer.setGeoJSON(icons);
+    $('#term').val("");
+  });
+</script>

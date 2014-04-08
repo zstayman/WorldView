@@ -28,14 +28,16 @@ body {
   float: left;
 }
 
-.user-forms {
+form {
+  text-align: center;
+  padding-top: 10px;
   border: 1px solid black;
-  width: 48%;
   display: inline-block;
   margin: 10px;
-  height: 100px;
-  float: right;
+  height: 90px;
+  width: 48%;
   margin-right: 0;
+  float: right;
 }
 
 .container{

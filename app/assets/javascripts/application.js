@@ -15,4 +15,9 @@
 //= require underscore
 //= require backbone
 //= require turbolinks
-//= require_tree .
+//= require_self
+//= require map
+//= require_tree ./models
+//= require_tree ./views
+
+var WorldView = {};
