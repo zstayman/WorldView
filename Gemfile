@@ -39,12 +39,14 @@ group :development, :test do
   gem 'jasmine'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'capybara-webkit'
+  # gem 'capybara-webkit'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'launchy'
   gem 'shoulda-matchers'
   gem 'pry-rails'
   gem 'ffaker'
+  gem 'simplecov'
 end
 
 gem 'redis'

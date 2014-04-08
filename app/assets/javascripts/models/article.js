@@ -12,16 +12,17 @@ var ArticleView = Backbone.View.extend({
     _.each(collection.models, function(elem){
       if(elem.attributes.geo_facet !== "" ){
         var x;
-        geocoder.query(elem.attributes.geo_facet[0], function(nada, data){
+        _.each(elem.attributes.geo_facet, function(place){geocoder.query(place, function(nada, data){
           elem.attributes.latlng = data.latlng
-          view.dropPin(elem.attributes);}
-        )};
+          view.dropPin(elem.attributes);
+        })
+      })
+      }}
+      )
+  },
 
-      }
-      )},
-
-    dropPin: function(item){
-      L.mapbox.featureLayer({
+  dropPin: function(item){
+    L.mapbox.featureLayer({
     // this feature is in the GeoJSON format: see geojson.org
     // for the full specification
     type: 'Feature',
@@ -30,34 +31,35 @@ var ArticleView = Backbone.View.extend({
         // coordinates here are in longitude, latitude order because
         // x, y is the standard for GeoJSON and many formats
 
-        coordinates: [item.latlng[1], item.latlng[0]]
+        coordinates: [item.latlng[1] + Math.floor(Math.random() - 1), item.latlng[0] + Math.floor(Math.random() - 1)]
       },
       properties: {
         title: item.title,
         description: '<a href='+ item.url +' target="_blank">'+item.abstract+'</a>',
         // one can customize markers by adding simplestyle properties
         // http://mapbox.com/developers/simplestyle/
-        'marker-size': 'small',
-        'marker-color': view.pinColor(item.section)
+        'marker-size': 'medium',
+        'marker-symbol': view.pinStyle(item.section),
+        'marker-color': "#000000"
       }
     }).addTo(map);
-    },
+  },
 
-    pinColor: function(section){
-      var colorHash = {
-        "Business Day": "#61FF53",
-        "U.S.": "#1C0CE8",
-        "Science": "#53FFC2",
-        "World": "#FF0000"
-      };
+  pinStyle: function(section){
+    var styleHash = {
+      "Business Day": "mobilephone",
+      "U.S.": "bank",
+      "Science": "chemist",
+      "World": "embassy"
+    };
 
-      return colorHash[section];
-    },
+    return styleHash[section];
+  },
 
-    initialize: function(){
-      this.render(this.collection, this);
-    }
-  });
+  initialize: function(){
+    this.render(this.collection, this);
+  }
+});
 
 var articles, map, geocoder, view;
 
