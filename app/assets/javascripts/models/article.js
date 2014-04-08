@@ -57,6 +57,8 @@ var ArticleView = Backbone.View.extend({
   },
 
   initialize: function(){
+    map = L.mapbox.map('map', 'zstayman.hn1a3ih4').setView([30,0], 2);
+    geocoder = L.mapbox.geocoder('zstayman.hn1a3ih4');
     this.render(this.collection, this);
   }
 });
@@ -64,12 +66,12 @@ var ArticleView = Backbone.View.extend({
 var articles, map, geocoder, view;
 
 $(document).ready(function(){
-
+  var map, geocoder;
   $.getJSON("/articles").done(function(json){
     articles = new ArticleCollection(json.response);
     view = new ArticleView({collection: articles});
   });
-  geocoder = L.mapbox.geocoder('zstayman.hn1a3ih4')
-  map = L.mapbox.map('map', 'zstayman.hn1a3ih4')
+
+
 });
 

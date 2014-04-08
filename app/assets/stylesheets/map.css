@@ -1,10 +1,44 @@
+@import url(http://fonts.googleapis.com/css?family=Days+One);
+
 #map {
-  height: 650px;
-  width: 95%;
-  margin: 50px 2.5% 100px 2.5%;
+  height: 600px;
+  width: 65%;
+  margin-left: 17.5%;
+  /*display: inline-block;*/
 }
 
 body {
   min-height: 100%;
   min-width: 100%;
+}
+
+#title {
+  text-align: center;
+  font-family: "Days One" sans-serif;
+  font-size: 50px;
+}
+
+.legend {
+  border: 1px solid black;
+  display: inline-block;
+  margin: 10px;
+  height: 100px;
+  width: 48%;
+  margin-left: 0;
+  float: left;
+}
+
+.user-forms {
+  border: 1px solid black;
+  width: 48%;
+  display: inline-block;
+  margin: 10px;
+  height: 100px;
+  float: right;
+  margin-right: 0;
+}
+
+.container{
+  width: 65%;
+  margin: 0 auto;
 }
