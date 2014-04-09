@@ -17,7 +17,7 @@ var Article = Backbone.Model.extend({
 
   changeLatLng: function(){
     WorldView.geoJson.push(this.dropPin(this));
-    if (WorldView.geoJson.length === WorldView.numberOfPlaces - 5) {
+    if (WorldView.geoJson.length === WorldView.numberOfPlaces - 20) {
       view.pushIn(map, WorldView.geoJson);
     }
     //debugger;
