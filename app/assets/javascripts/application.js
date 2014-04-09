@@ -16,7 +16,6 @@
 //= require backbone
 //= require turbolinks
 //= require_self
-//= require map
 //= require_tree ./models
 //= require_tree .
 

@@ -1,3 +1,4 @@
+// variables
 var articles,
     map,
     geocoder,
@@ -5,16 +6,20 @@ var articles,
     geoJson,
     pin;
 
+// set counters and holders
 WorldView.geoJson = [];
 WorldView.placesCounter = 0;
 
+// Article Model
 var Article = Backbone.Model.extend({
   urlRoot: '/articles',
 
+// fires the change event to set LatLng
   initialize: function(){
     this.on('change:latlng', this.changeLatLng, this);
   },
 
+// sets LatLng based on geocoder results and orders the map to render
   changeLatLng: function(){
     WorldView.geoJson.push(this.dropPin(this));
     if (WorldView.geoJson.length === WorldView.numberOfPlaces - 20) {
@@ -23,6 +28,7 @@ var Article = Backbone.Model.extend({
     //debugger;
   },
 
+// creates the GeoJSON object
   dropPin: function(item){
     return {
     // this feature is in the GeoJSON format: see geojson.org
@@ -47,6 +53,7 @@ var Article = Backbone.Model.extend({
     };
   },
 
+// sets the icon on the pin
   pinStyle: function(section){
     var styleHash = {
       "Business Day": "mobilephone",
@@ -60,12 +67,15 @@ var Article = Backbone.Model.extend({
 
 });
 
+// defines the collection
 var ArticleCollection = Backbone.Collection.extend({
   model: Article,
   url: '/articles'
 });
 
+// logic relating to the map
 var ArticleView = Backbone.View.extend({
+  // creates the GeoJSON objects
   render: function(collection, view, callback){
 
     _.map(collection.models, function(elem){
@@ -86,25 +96,31 @@ var ArticleView = Backbone.View.extend({
   },
 
 
-
+// adds pins to the map
   pushIn: function(map, geoJson){
    return map.featureLayer.setGeoJSON(geoJson)
  },
 
+// initializes the view
  initialize: function(){
-  //geoJson = new Array;
   geocoder = L.mapbox.geocoder('zstayman.hn1a3ih4');
-    // this.render(this.collection, this);
   }
 });
 
 
-
+// loads on pageload
 $(document).ready(function(){
+  // adds the map to the page
   map = L.mapbox.map('map', 'zstayman.hn1a3ih4').setView([30,0], 2);
+  // gets the article objects
   $.getJSON("/articles", function(json){
+    // creates the collection with the response
     articles = new ArticleCollection(json.response);
+
+    // creates a view
     view = new ArticleView({collection: articles});
+
+    // runs the render action
     view.render(view.collection, view, view.pushIn);
   });
 });
