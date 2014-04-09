@@ -39,15 +39,15 @@ var Article = Backbone.Model.extend({
         // coordinates here are in longitude, latitude order because
         // x, y is the standard for GeoJSON and many formats
 
-        coordinates: [item.attributes.latlng[1] + Math.random(), item.attributes.latlng[0] + Math.random()]
+        coordinates: [item.get(latlng)[1] + Math.random(), item.get(latlng)[0] + Math.random()]
       },
       properties: {
         title: item.attributes.title,
-        description: '<a href='+ item.attributes.url +' target="_blank">'+item.attributes.abstract+'</a>',
+        description: '<a href='+ item.get(url) +' target="_blank">'+item.get(abstract)+'</a>',
         // one can customize markers by adding simplestyle properties
         // http://mapbox.com/developers/simplestyle/
         'marker-size': 'medium',
-        'marker-symbol': item.pinStyle(item.attributes.section),
+        'marker-symbol': item.pinStyle(item.get(section)),
         'marker-color': "#000000"
       }
     };
@@ -79,7 +79,7 @@ var ArticleView = Backbone.View.extend({
   render: function(collection, view, callback){
 
     _.map(collection.models, function(elem){
-      if(elem.attributes.geo_facet !== "" ){
+      if(elem.get(geo_facet) !== "" ){
         _.map(elem.attributes.geo_facet, function(place){
           WorldView.placesCounter++;
           geocoder.query(place, function(error, data){
