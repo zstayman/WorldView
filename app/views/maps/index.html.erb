@@ -35,6 +35,7 @@
 
       _.each(icons, function(elem){
         elem.properties['marker-color'] = "#000000"
+        elem.properties['marker-size'] = "medium";
         if(term !== "" && (elem.properties['title'].toLowerCase().indexOf(term) !== -1 || elem.properties['description'].toLowerCase().indexOf(term) !== -1)){
           elem.properties['marker-color'] = "#FFE338";
           elem.properties['marker-size'] = "large";
