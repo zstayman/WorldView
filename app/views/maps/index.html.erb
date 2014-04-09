@@ -20,6 +20,7 @@
     </div>
   </div>
   <div class="search_form"></div>
+  <!-- creates the form for searching -->
   <%= form_tag do %>
   <%= label_tag(:term, "Find Stories Related To:") %><br>
   <%= text_field_tag(:term) %><br>
@@ -28,20 +29,36 @@
   <div>
 
     <script type="text/javascript">
+    // runs the form logic
     $("form").on("submit", function(e){
       e.preventDefault();
+      // retrieves the search term
       var term = $('#term').val().toLowerCase();
+      // retrieves the marker objects
       var icons = map.featureLayer.getGeoJSON();
 
+      // searches the markers
       _.each(icons, function(elem){
+
+        // resets any currently highlighted markers
         elem.properties['marker-color'] = "#000000"
         elem.properties['marker-size'] = "medium";
+
+        // checks to see if the marker matches the search term
         if(term !== "" && (elem.properties['title'].toLowerCase().indexOf(term) !== -1 || elem.properties['description'].toLowerCase().indexOf(term) !== -1)){
+
+          // changes the marker color
           elem.properties['marker-color'] = "#FFE338";
+
+          // enlarges the marker
           elem.properties['marker-size'] = "large";
         }
       });
+
+      // adds the altered markers to the map
       map.featureLayer.setGeoJSON(icons);
+
+      // resets the form field
       $('#term').val("");
     });
     </script>
