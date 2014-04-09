@@ -30,12 +30,12 @@
     <script type="text/javascript">
     $("form").on("submit", function(e){
       e.preventDefault();
-      var term = $('#term').val();
+      var term = $('#term').val().toLowerCase();
       var icons = map.featureLayer.getGeoJSON();
 
       _.each(icons, function(elem){
         elem.properties['marker-color'] = "#000000"
-        if(term !== "" && (elem.properties['title'].indexOf(term) !== -1 || elem.properties['description'].indexOf(term) !== -1)){
+        if(term !== "" && (elem.properties['title'].toLowerCase().indexOf(term) !== -1 || elem.properties['description'].toLowerCase().indexOf(term) !== -1)){
           elem.properties['marker-color'] = "#FFE338";
           elem.properties['marker-size'] = "large";
         }
