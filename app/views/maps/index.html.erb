@@ -1,33 +1,45 @@
 <h1 id="title">March of Times</h1>
 <div id="map" class="this"></div>
 <div class="container">
-<div class="legend">
-    <div class="key">World</div>
-    <div class="key">U.S.</div>
-    <div class="key">Science</div>
-    <div class="key">Business</div>
-</div>
-<div class="search_form"></div>
-<%= form_tag do %>
-<%= label_tag(:term, "Find Stories Related To:") %>
-<%= text_field_tag(:term) %><br><br>
-<%= submit_tag("Highlight") %>
-<% end %>
-<div>
+  <div class="legend">
+    <div class="key">
+      <span>World</span><br>
+      <%= image_tag "renders/embassy-24@2x.png" %>
+    </div>
+    <div class="key">
+      <span>U.S.</span><br>
+      <%= image_tag "renders/bank-24@2x.png" %>
+    </div>
+    <div class="key">
+      <span>Science</span><br>
+      <%= image_tag "renders/chemist-24@2x.png" %>
+    </div>
+    <div class="key">
+      <span>Business</span><br>
+      <%= image_tag "renders/mobilephone-24@2x.png" %>
+    </div>
+  </div>
+  <div class="search_form"></div>
+  <%= form_tag do %>
+  <%= label_tag(:term, "Find Stories Related To:") %><br>
+  <%= text_field_tag(:term) %><br>
+  <%= submit_tag("Highlight") %>
+  <% end %>
+  <div>
 
-<script type="text/javascript">
-  $("form").on("submit", function(e){
-    e.preventDefault();
-    var term = $('#term').val();
-    var icons = map.featureLayer.getGeoJSON();
+    <script type="text/javascript">
+    $("form").on("submit", function(e){
+      e.preventDefault();
+      var term = $('#term').val();
+      var icons = map.featureLayer.getGeoJSON();
 
-    _.each(icons, function(elem){
-      elem.properties['marker-color'] = "#000000"
-      if(elem.properties['title'].indexOf(term) !== -1 || elem.properties['description'].indexOf(term) !== -1){
-        elem.properties['marker-color'] = "#FFFFFF";
-      }
+      _.each(icons, function(elem){
+        elem.properties['marker-color'] = "#000000"
+        if(term !== "" && (elem.properties['title'].indexOf(term) !== -1 || elem.properties['description'].indexOf(term) !== -1)){
+          elem.properties['marker-color'] = "#FFFFFF";
+        }
       });
-    map.featureLayer.setGeoJSON(icons);
-    $('#term').val("");
-  });
-</script>
+      map.featureLayer.setGeoJSON(icons);
+      $('#term').val("");
+    });
+    </script>
