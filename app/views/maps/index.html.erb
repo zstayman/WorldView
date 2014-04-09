@@ -36,7 +36,8 @@
       _.each(icons, function(elem){
         elem.properties['marker-color'] = "#000000"
         if(term !== "" && (elem.properties['title'].indexOf(term) !== -1 || elem.properties['description'].indexOf(term) !== -1)){
-          elem.properties['marker-color'] = "#FFFFFF";
+          elem.properties['marker-color'] = "#FFE338";
+          elem.properties['marker-size'] = "large";
         }
       });
       map.featureLayer.setGeoJSON(icons);
