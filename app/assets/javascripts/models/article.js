@@ -79,9 +79,10 @@ var ArticleView = Backbone.View.extend({
   render: function(collection, view, callback){
 
     _.map(collection.models, function(elem){
-      if(elem.get(geo_facet) !== "" ){
+      if(elem.get("geo_facet") !== "" ){
         _.map(elem.attributes.geo_facet, function(place){
           WorldView.placesCounter++;
+          console.log(WorldView.geoJson);
           geocoder.query(place, function(error, data){
             //console.log();
             elem.set("latlng", data.latlng);
