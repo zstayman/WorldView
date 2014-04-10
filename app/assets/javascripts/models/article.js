@@ -22,7 +22,7 @@ var Article = Backbone.Model.extend({
 // sets LatLng based on geocoder results and orders the map to render
   changeLatLng: function(){
     WorldView.geoJson.push(this.dropPin(this));
-    if (WorldView.geoJson.length === WorldView.numberOfPlaces - 50) {
+    if (WorldView.geoJson.length === WorldView.numberOfPlaces - 20) {
       view.pushIn(map, WorldView.geoJson);
     }
     //debugger;
