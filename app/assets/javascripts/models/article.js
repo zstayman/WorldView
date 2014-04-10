@@ -22,7 +22,7 @@ var Article = Backbone.Model.extend({
 // sets LatLng based on geocoder results and orders the map to render
   changeLatLng: function(){
     WorldView.geoJson.push(this.dropPin(this));
-    if (WorldView.geoJson.length === WorldView.numberOfPlaces - 20) {
+    if (WorldView.geoJson.length === WorldView.numberOfPlaces - 50) {
       view.pushIn(map, WorldView.geoJson);
     }
     //debugger;
@@ -39,15 +39,15 @@ var Article = Backbone.Model.extend({
         // coordinates here are in longitude, latitude order because
         // x, y is the standard for GeoJSON and many formats
 
-        coordinates: [item.get(latlng)[1] + Math.random(), item.get(latlng)[0] + Math.random()]
+        coordinates: [item.get("latlng")[1] + Math.random(), item.get("latlng")[0] + Math.random()]
       },
       properties: {
         title: item.attributes.title,
-        description: '<a href='+ item.get(url) +' target="_blank">'+item.get(abstract)+'</a>',
+        description: '<a href='+ item.get("url") +' target="_blank">'+item.get("abstract")+'</a>',
         // one can customize markers by adding simplestyle properties
         // http://mapbox.com/developers/simplestyle/
         'marker-size': 'medium',
-        'marker-symbol': item.pinStyle(item.get(section)),
+        'marker-symbol': item.pinStyle(item.get("section")),
         'marker-color': "#000000"
       }
     };
