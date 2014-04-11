@@ -22,7 +22,9 @@ var Article = Backbone.Model.extend({
 // sets LatLng based on geocoder results and orders the map to render
   changeLatLng: function(){
     WorldView.geoJson.push(this.dropPin(this));
+    // it takes too long to async, I need to call this later in the process
     if (WorldView.geoJson.length === WorldView.numberOfPlaces - 20) {
+      console.log(WorldView.numberOfPlaces)
       view.pushIn(map, WorldView.geoJson);
     }
     //debugger;
