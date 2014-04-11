@@ -24,7 +24,7 @@ var Article = Backbone.Model.extend({
     WorldView.geoJson.push(this.dropPin(this));
     // it takes too long to async, I need to call this later in the process
     if (WorldView.geoJson.length === WorldView.numberOfPlaces - 20) {
-      console.log(WorldView.numberOfPlaces)
+      console.log(WorldView.numberOfPlaces);
       view.pushIn(map, WorldView.geoJson);
     }
     //debugger;
