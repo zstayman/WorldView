@@ -1,10 +1,10 @@
 // variables
 var articles,
-    map,
-    geocoder,
-    view,
-    geoJson,
-    pin;
+map,
+geocoder,
+view,
+geoJson,
+pin;
 
 // set counters and holders
 WorldView.geoJson = [];
@@ -15,14 +15,14 @@ var Article = Backbone.Model.extend({
   urlRoot: '/articles',
 
 // fires the change event to set LatLng
-  initialize: function(){
-    this.on('change:latlng', this.changeLatLng, this);
-  },
+initialize: function(){
+  this.on('change:latlng', this.changeLatLng, this);
+},
 
 // sets LatLng based on geocoder results and orders the map to render
-  changeLatLng: function(){
+changeLatLng: function(){
 
-    WorldView.geoJson.push(this.dropPin(this));
+  WorldView.geoJson.push(this.dropPin(this));
     // it takes too long to async, I need to call this later in the process
     console.log("Pin Created")
     if (WorldView.geoJson.length === WorldView.numberOfPlaces - 15) {
@@ -34,8 +34,8 @@ var Article = Backbone.Model.extend({
   },
 
 // creates the GeoJSON object
-  dropPin: function(item){
-    return {
+dropPin: function(item){
+  return {
     // this feature is in the GeoJSON format: see geojson.org
     // for the full specification
     type: 'Feature',
@@ -59,16 +59,16 @@ var Article = Backbone.Model.extend({
   },
 
 // sets the icon on the pin
-  pinStyle: function(section){
-    var styleHash = {
-      "Business Day": "mobilephone",
-      "U.S.": "bank",
-      "Science": "chemist",
-      "World": "embassy"
-    };
+pinStyle: function(section){
+  var styleHash = {
+    "Business Day": "mobilephone",
+    "U.S.": "bank",
+    "Science": "chemist",
+    "World": "embassy"
+  };
 
-    return styleHash[section];
-  },
+  return styleHash[section];
+},
 
 });
 
@@ -90,8 +90,10 @@ var ArticleView = Backbone.View.extend({
           console.log(WorldView.geoJson);
           geocoder.query(place, function(error, data){
             //console.log();
-            console.log(data.latlng);
-            elem.set("latlng", data.latlng);
+            if(data != undefined){
+
+              elem.set("latlng", data.latlng);
+            };
             //pinData(view.dropPin(elem.attributes, view));
           });
         });
@@ -104,14 +106,14 @@ var ArticleView = Backbone.View.extend({
 
 
 // adds pins to the map
-  pushIn: function(map, geoJson){
-   return map.featureLayer.setGeoJSON(geoJson)
- },
+pushIn: function(map, geoJson){
+ return map.featureLayer.setGeoJSON(geoJson)
+},
 
 // initializes the view
- initialize: function(){
+initialize: function(){
   geocoder = L.mapbox.geocoder('zstayman.hn1a3ih4');
-  }
+}
 });
 
 // loads on pageload
