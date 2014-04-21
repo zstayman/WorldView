@@ -9,7 +9,7 @@ pin;
 // set counters and holders
 WorldView.geoJson = [];
 WorldView.placesCounter = 0;
-WorldView.map = L.mapbox.map('map', 'zstayman.hn1a3ih4').setView([30,0], 2);
+WorldView.map = map
 
 // Article Model
 var Article = Backbone.Model.extend({
@@ -125,7 +125,7 @@ $(document).ready(function(){
 
     // creates a view
     view = new ArticleView({collection: articles});
-
+    map = L.mapbox.map('map', 'zstayman.hn1a3ih4').setView([30,0], 2);
     // runs the render action
     view.render(view.collection, view, view.pushIn);
     setTimeout(view.pushIn, 15000)
