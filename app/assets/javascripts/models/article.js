@@ -21,10 +21,12 @@ var Article = Backbone.Model.extend({
 
 // sets LatLng based on geocoder results and orders the map to render
   changeLatLng: function(){
+
     WorldView.geoJson.push(this.dropPin(this));
     // it takes too long to async, I need to call this later in the process
     console.log("Pin Created")
     if (WorldView.geoJson.length === WorldView.numberOfPlaces - 15) {
+
       console.log(WorldView.numberOfPlaces);
       view.pushIn(map, WorldView.geoJson);
     }
@@ -88,6 +90,7 @@ var ArticleView = Backbone.View.extend({
           console.log(WorldView.geoJson);
           geocoder.query(place, function(error, data){
             //console.log();
+            debugger;
             elem.set("latlng", data.latlng);
             //pinData(view.dropPin(elem.attributes, view));
           });
@@ -110,7 +113,6 @@ var ArticleView = Backbone.View.extend({
   geocoder = L.mapbox.geocoder('zstayman.hn1a3ih4');
   }
 });
-
 
 // loads on pageload
 $(document).ready(function(){
