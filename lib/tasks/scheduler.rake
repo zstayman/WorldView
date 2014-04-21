@@ -10,11 +10,11 @@ namespace :scheduler do
 
     # converts each article to JSON and adds it to a redis sorted set
     response["results"].each do |article|
-      $r.xadd "articles", article.to_json, 86400
+      $r.xadd "articles", article.to_json, 43200
     end
     while offset < results
       HTTParty.get("http://api.nytimes.com/svc/news/v3/content/all/world;u.s.;business;washington;homepage;international+home;national;science;technology/1.json?offset=#{offset}&api-key=#{NYT_WIRE}")["results"].each do |article|
-        $r.xadd "articles", article.to_json, 86400
+        $r.xadd "articles", article.to_json, 43200
       end
       offset += 20
     end
