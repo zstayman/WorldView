@@ -90,7 +90,7 @@ var ArticleView = Backbone.View.extend({
           console.log(WorldView.geoJson);
           geocoder.query(place, function(error, data){
             //console.log();
-            debugger;
+            console.log(data.latlng);
             elem.set("latlng", data.latlng);
             //pinData(view.dropPin(elem.attributes, view));
           });
