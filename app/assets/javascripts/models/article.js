@@ -105,7 +105,7 @@ var ArticleView = Backbone.View.extend({
 
 // adds pins to the map
 pushIn: function(){
- return WorldView.map.featureLayer.setGeoJSON(WorldView.geoJson)
+ return map.featureLayer.setGeoJSON(WorldView.geoJson)
 },
 
 // initializes the view
