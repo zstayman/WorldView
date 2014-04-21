@@ -103,8 +103,8 @@ var ArticleView = Backbone.View.extend({
 
 
 // adds pins to the map
-pushIn: function(map, geoJson){
- return map.featureLayer.setGeoJSON(geoJson)
+pushIn: function(){
+ return WorldView.map.featureLayer.setGeoJSON(WorldView.geoJson)
 },
 
 // initializes the view
@@ -116,7 +116,7 @@ initialize: function(){
 // loads on pageload
 $(document).ready(function(){
   // adds the map to the page
-  map = L.mapbox.map('map', 'zstayman.hn1a3ih4').setView([30,0], 2);
+  WorldView.map = L.mapbox.map('map', 'zstayman.hn1a3ih4').setView([30,0], 2);
   // gets the article objects
   $.getJSON("/articles", function(json){
     // creates the collection with the response
@@ -127,7 +127,7 @@ $(document).ready(function(){
 
     // runs the render action
     view.render(view.collection, view, view.pushIn);
-    window.setTimeout(view.pushIn(map, WorldView.geoJson), 1000)
+    setTimeout(view.pushIn, 10000)
   });
 });
 
