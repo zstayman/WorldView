@@ -9,7 +9,7 @@ pin;
 // set counters and holders
 WorldView.geoJson = [];
 WorldView.placesCounter = 0;
-WorldView.map;
+WorldView.map = L.mapbox.map('map', 'zstayman.hn1a3ih4').setView([30,0], 2);
 
 // Article Model
 var Article = Backbone.Model.extend({
@@ -117,7 +117,7 @@ initialize: function(){
 // loads on pageload
 $(document).ready(function(){
   // adds the map to the page
-  WorldView.map = L.mapbox.map('map', 'zstayman.hn1a3ih4').setView([30,0], 2);
+
   // gets the article objects
   $.getJSON("/articles", function(json){
     // creates the collection with the response
