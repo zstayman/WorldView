@@ -127,7 +127,7 @@ $(document).ready(function(){
 
     // runs the render action
     view.render(view.collection, view, view.pushIn);
-    setTimeout(view.pushIn, 10000)
+    setTimeout(view.pushIn, 15000)
   });
 });
 
