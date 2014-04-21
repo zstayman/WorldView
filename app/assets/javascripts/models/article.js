@@ -24,7 +24,7 @@ changeLatLng: function(){
 
   WorldView.geoJson.push(this.dropPin(this));
     // it takes too long to async, I need to call this later in the process
-    console.log("Pin Created")
+    // console.log("Pin Created")
     if (WorldView.geoJson.length > WorldView.numberOfPlaces - 15) {
       view.pushIn(map, WorldView.geoJson);
     }
@@ -85,7 +85,7 @@ var ArticleView = Backbone.View.extend({
       if(elem.get("geo_facet") !== "" ){
         _.map(elem.attributes.geo_facet, function(place){
           WorldView.placesCounter++;
-          console.log(WorldView.geoJson);
+          // console.log(WorldView.geoJson);
           geocoder.query(place, function(error, data){
             //console.log();
             if(data != undefined){
@@ -127,6 +127,7 @@ $(document).ready(function(){
 
     // runs the render action
     view.render(view.collection, view, view.pushIn);
+    window.setTimeout(view.pushIn(map, WorldView.geoJson), 1000)
   });
 });
 
