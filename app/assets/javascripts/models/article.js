@@ -26,8 +26,6 @@ changeLatLng: function(){
     // it takes too long to async, I need to call this later in the process
     console.log("Pin Created")
     if (WorldView.geoJson.length > WorldView.numberOfPlaces - 15) {
-
-      console.log(WorldView.numberOfPlaces);
       view.pushIn(map, WorldView.geoJson);
     }
     //debugger;
