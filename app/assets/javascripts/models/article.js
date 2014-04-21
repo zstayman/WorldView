@@ -25,7 +25,7 @@ changeLatLng: function(){
   WorldView.geoJson.push(this.dropPin(this));
     // it takes too long to async, I need to call this later in the process
     console.log("Pin Created")
-    if (WorldView.geoJson.length === WorldView.numberOfPlaces - 15) {
+    if (WorldView.geoJson.length > WorldView.numberOfPlaces - 15) {
 
       console.log(WorldView.numberOfPlaces);
       view.pushIn(map, WorldView.geoJson);
@@ -91,7 +91,6 @@ var ArticleView = Backbone.View.extend({
           geocoder.query(place, function(error, data){
             //console.log();
             if(data != undefined){
-
               elem.set("latlng", data.latlng);
             };
             //pinData(view.dropPin(elem.attributes, view));
