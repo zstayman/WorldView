@@ -17,7 +17,8 @@ var Article = Backbone.Model.extend({
 
 // fires the change event to set LatLng
 initialize: function(){
-  this.on('change:latlng', this.changeLatLng, this);
+  // this.on('change:latlng', this.changeLatLng, this);
+  this.changeLatLng(this);
 },
 
 // sets LatLng based on geocoder results and orders the map to render
@@ -43,7 +44,7 @@ dropPin: function(item){
         // coordinates here are in longitude, latitude order because
         // x, y is the standard for GeoJSON and many formats
 
-        coordinates: [item.get("latlng")[1] + Math.random(), item.get("latlng")[0] + Math.random()]
+        coordinates: [item.get("geo_facet")[1] + Math.random(), item.get("geo_facet")[0] + Math.random()]
       },
       properties: {
         title: item.attributes.title,
@@ -82,24 +83,26 @@ var ArticleView = Backbone.View.extend({
   // creates the GeoJSON objects
   render: function(collection, view, callback){
 
-    _.map(collection.models, function(elem){
-      if(elem.get("geo_facet") !== "" ){
-        _.map(elem.attributes.geo_facet, function(place){
-          WorldView.placesCounter++;
+    // _.map(collection.models, function(elem){
+    //   if(elem.get("geo_facet") !== "" ){
+    //     _.map(elem.attributes.geo_facet, function(place){
+    //       WorldView.placesCounter++;
           // console.log(WorldView.geoJson);
-          geocoder.query(place, function(error, data){
+          // geocoder.query(place, function(error, data){
             //console.log();
-            if(data != undefined){
-              elem.set("latlng", data.latlng);
-            };
+            // if(data != undefined){
+            //   elem.set("latlng", data.latlng);
+            // };
             //pinData(view.dropPin(elem.attributes, view));
-          });
-        });
-      }
-    });
-    WorldView.numberOfPlaces = WorldView.placesCounter;
+    //       });
+    //     });
+    //   }
+    // });
+    // WorldView.numberOfPlaces = WorldView.placesCounter;
     //debugger;
     //return view.pushIn(map, geoJson);
+
+
   },
 
 
@@ -127,8 +130,8 @@ $(document).ready(function(){
     view = new ArticleView({collection: articles});
     map = L.mapbox.map('map', 'zstayman.hn1a3ih4').setView([30,0], 2);
     // runs the render action
-    view.render(view.collection, view, view.pushIn);
-    setTimeout(view.pushIn, 15000)
+    view.render();
+    view.pushIn();
   });
 });
 
