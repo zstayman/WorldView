@@ -81,26 +81,9 @@ var ArticleCollection = Backbone.Collection.extend({
 // logic relating to the map
 var ArticleView = Backbone.View.extend({
   // creates the GeoJSON objects
-  render: function(collection, view, callback){
+  render: function(){
 
-    // _.map(collection.models, function(elem){
-    //   if(elem.get("geo_facet") !== "" ){
-    //     _.map(elem.attributes.geo_facet, function(place){
-    //       WorldView.placesCounter++;
-          // console.log(WorldView.geoJson);
-          // geocoder.query(place, function(error, data){
-            //console.log();
-            // if(data != undefined){
-            //   elem.set("latlng", data.latlng);
-            // };
-            //pinData(view.dropPin(elem.attributes, view));
-    //       });
-    //     });
-    //   }
-    // });
-    // WorldView.numberOfPlaces = WorldView.placesCounter;
-    //debugger;
-    //return view.pushIn(map, geoJson);
+
 
 
   },
