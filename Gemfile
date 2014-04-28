@@ -61,3 +61,5 @@ gem 'redis-expiring-set'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'geocoder'
