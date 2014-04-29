@@ -12,9 +12,10 @@ namespace :scheduler do
         latlng = Geocoder.search(article["geo_facet"].first).first
           unless latlng.nil?
             article["geo_facet"] = latlng.coordinates
+            $r.xadd "articles", article.to_json, 172800
           end
         # converts each article to JSON and adds it to a redis sorted set
-        $r.xadd "articles", article.to_json, 172800
+
       end
     end
 
@@ -24,8 +25,9 @@ namespace :scheduler do
           latlng = Geocoder.search(article["geo_facet"].first).first
           unless latlng.nil?
             article["geo_facet"] = latlng.coordinates
+            $r.xadd "articles", article.to_json, 172800
           end
-          $r.xadd "articles", article.to_json, 172800
+
         end
       end
       offset += 20
