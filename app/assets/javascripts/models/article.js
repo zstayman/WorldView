@@ -56,9 +56,10 @@ dropPin: function(item){
 pinStyle: function(section){
   var styleHash = {
     "Business Day": "mobilephone",
-    "U.S.": "bank",
+    "U.S.": "town-hall",
     "Science": "chemist",
-    "World": "embassy"
+    "World": "embassy",
+    "Technology": "polling-place"
   };
 
   return styleHash[section];
